@@ -1,5 +1,5 @@
-import  Navbar  from "@/components/home/navbar";
-import  Footer  from "@/components/home/footer";
+import Navbar from "@/components/home/navbar";
+import Footer from "@/components/home/footer";
 import { FloatingContact } from "@/components/floating-contact";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -87,10 +87,20 @@ const socialResponsibility = [
 
 export const metadata = {
   title: "الاستدامة | مصنع التكامل للأعلاف",
-  description: "نلتزم في مصنع التكامل للأعلاف بممارسات الاستدامة البيئية والمسؤولية الاجتماعية لضمان إنتاج أعلاف صديقة للبيئة.",
-  keywords: ["استدامة", "بيئة", "مسؤولية اجتماعية", "أعلاف صديقة للبيئة", "مصنع أعلاف", "إنتاج مستدام"],
+  description:
+    "نلتزم في مصنع التكامل للأعلاف بممارسات الاستدامة البيئية والمسؤولية الاجتماعية لضمان إنتاج أعلاف صديقة للبيئة.",
+  alternates: {
+    canonical: "https://altakamull.com/sustainability",
+  },
+    keywords: [
+    "استدامة",
+    "بيئة",
+    "مسؤولية اجتماعية",
+    "أعلاف صديقة للبيئة",
+    "مصنع أعلاف",
+    "إنتاج مستدام",
+  ],
 };
-
 
 export default function SustainabilityPage() {
   return (
@@ -190,7 +200,9 @@ export default function SustainabilityPage() {
                 <Card key={index} className={"dark:bg-cardark"}>
                   <CardContent className="p-6">
                     <div className="mb-2 flex items-center justify-between">
-                      <h3 className="font-semibold text-taka">{initiative.title}</h3>
+                      <h3 className="font-semibold text-taka">
+                        {initiative.title}
+                      </h3>
                       <span className="text-sm font-medium text-primary">
                         {initiative.progress}%
                       </span>
@@ -278,7 +290,7 @@ export default function SustainabilityPage() {
               <div className="relative">
                 <div className="aspect-[4/3] overflow-hidden rounded-2xl">
                   <img
-                    src="https://cornflowerblue-albatross-308247.hostingersite.com/images/poultry-farm-with-healthy-chickens.jpg"
+                    src="https://mediumturquoise-mandrill-992538.hostingersite.com/images/poultry-farm-with-healthy-chickens.jpg"
                     alt="حلول أعلاف مستدامة"
                     className="h-full w-full object-cover"
                   />

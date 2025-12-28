@@ -1,5 +1,5 @@
-import  Navbar  from "@/components/home/navbar";
-import  Footer  from "@/components/home/footer";
+import Navbar from "@/components/home/navbar";
+import Footer from "@/components/home/footer";
 import { FloatingContact } from "@/components/floating-contact";
 import {
   Factory,
@@ -109,8 +109,19 @@ const technologies = [
 
 export const metadata = {
   title: "الإنتاج والتقنية | مصنع التكامل للأعلاف",
-  description: "تعرف على خطوط الإنتاج الحديثة والتقنيات المتطورة في مصنع التكامل للأعلاف لضمان أعلى جودة وكفاءة في إنتاج الأعلاف.",
-  keywords: ["الإنتاج", "التقنية", "خطوط الإنتاج", "أعلاف عالية الجودة", "معدات حديثة", "مصنع أعلاف"],
+ alternates: {
+    canonical: "https://altakamull.com/production",
+  },
+  description:
+    "تعرف على خطوط الإنتاج الحديثة والتقنيات المتطورة في مصنع التكامل للأعلاف لضمان أعلى جودة وكفاءة في إنتاج الأعلاف.",
+  keywords: [
+    "الإنتاج",
+    "التقنية",
+    "خطوط الإنتاج",
+    "أعلاف عالية الجودة",
+    "معدات حديثة",
+    "مصنع أعلاف",
+  ],
 };
 
 export default function ProductionPage() {
@@ -264,7 +275,9 @@ export default function ProductionPage() {
                   className="group transition-all hover:shadow-lg dark:bg-cardark"
                 >
                   <CardHeader>
-                    <CardTitle className="text-lg text-taka">{tech.title}</CardTitle>
+                    <CardTitle className="text-lg text-taka">
+                      {tech.title}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground">{tech.description}</p>
@@ -281,21 +294,21 @@ export default function ProductionPage() {
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               <div className="aspect-[4/3] overflow-hidden rounded-2xl">
                 <img
-                  src="https://cornflowerblue-albatross-308247.hostingersite.com/images/modern-feed-production-line-machinery.jpg"
+                  src="https://mediumturquoise-mandrill-992538.hostingersite.com/images/modern-feed-production-line-machinery.jpg"
                   alt="خط الإنتاج"
                   className="h-full w-full object-cover"
                 />
               </div>
               <div className="aspect-[4/3] overflow-hidden rounded-2xl">
                 <img
-                  src="https://cornflowerblue-albatross-308247.hostingersite.com/images/industrial-feed-manufacturing-factory-aerial-view.jpg"
+                  src="https://mediumturquoise-mandrill-992538.hostingersite.com/images/industrial-feed-manufacturing-factory-aerial-view.jpg"
                   alt="المصنع من الداخل"
                   className="h-full w-full object-cover"
                 />
               </div>
               <div className="aspect-[4/3] overflow-hidden rounded-2xl md:col-span-2 lg:col-span-1">
                 <img
-                  src="https://cornflowerblue-albatross-308247.hostingersite.com/images/quality.jpg"
+                  src="https://mediumturquoise-mandrill-992538.hostingersite.com/images/quality.jpg"
                   alt="مختبر الجودة"
                   className="h-full w-full object-cover"
                 />

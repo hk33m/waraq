@@ -4,6 +4,9 @@ import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: "مصنع التكامل للأعلاف | Al-Takamul Feed Factory",
+  alternates: {
+    canonical: "https://altakamull.com",
+  },
   description:
     "مصنع التكامل للأعلاف في المملكة العربية السعودية - الشريك الموثوق لإنتاج أعلاف الدواجن والماشية عالية الجودة بقدرة إنتاجية تصل إلى 120 طن في الساعة. نقدم منتجات أعلاف عضوية ومدعمة بالفيتامينات لتغذية أفضل لمزارع الدواجن والماشية.",
   keywords: [

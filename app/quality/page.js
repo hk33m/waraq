@@ -1,5 +1,5 @@
-import  Navbar from "@/components/home/navbar";
-import  Footer  from "@/components/home/footer";
+import Navbar from "@/components/home/navbar";
+import Footer from "@/components/home/footer";
 import { FloatingContact } from "@/components/floating-contact";
 import {
   Shield,
@@ -105,8 +105,19 @@ const faqs = [
 
 export const metadata = {
   title: "الجودة | مصنع التكامل للأعلاف",
-  description: "نضمن أعلى معايير الجودة في كل منتجات مصنع التكامل للأعلاف، مع الالتزام بالمواصفات العالمية والرقابة الصارمة.",
-  keywords: ["الجودة", "معايير الجودة", "رقابة", "أعلاف مضمونة", "إنتاج عالي الجودة", "مصنع أعلاف"],
+  alternates: {
+    canonical: "https://altakamull.com/quality",
+  },
+  description:
+    "نضمن أعلى معايير الجودة في كل منتجات مصنع التكامل للأعلاف، مع الالتزام بالمواصفات العالمية والرقابة الصارمة.",
+  keywords: [
+    "الجودة",
+    "معايير الجودة",
+    "رقابة",
+    "أعلاف مضمونة",
+    "إنتاج عالي الجودة",
+    "مصنع أعلاف",
+  ],
 };
 
 export default function QualityPage() {
@@ -141,7 +152,7 @@ export default function QualityPage() {
               <span className="mb-4 inline-block text-sm font-semibold text-takar">
                 سياسة الجودة
               </span>
-              <h2 className="mb-4 text-3xl font-bold lg:text-4xl text-taka" >
+              <h2 className="mb-4 text-3xl font-bold lg:text-4xl text-taka">
                 ركائز الجودة لدينا
               </h2>
               <p className="mx-auto max-w-2xl text-muted-foreground">
@@ -189,7 +200,10 @@ export default function QualityPage() {
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {inspectionSteps.map((step, index) => (
-                <Card key={index} className="relative overflow-hidden dark:bg-cardark">
+                <Card
+                  key={index}
+                  className="relative overflow-hidden dark:bg-cardark"
+                >
                   <div className="absolute -left-4 -top-4 flex h-16 w-16 items-center justify-center rounded-full bg-takarr text-3xl font-bold text-primary/30">
                     {index + 1}
                   </div>
@@ -197,7 +211,9 @@ export default function QualityPage() {
                     <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-takarr text-primary">
                       <step.icon className="h-6 w-6" />
                     </div>
-                    <CardTitle className="text-lg text-taka">{step.title}</CardTitle>
+                    <CardTitle className="text-lg text-taka">
+                      {step.title}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="mb-4 text-sm text-muted-foreground">
@@ -256,7 +272,7 @@ export default function QualityPage() {
               <div className="relative">
                 <div className="aspect-square overflow-hidden rounded-2xl">
                   <img
-                    src="https://cornflowerblue-albatross-308247.hostingersite.com/images/quality.jpg"
+                    src="https://mediumturquoise-mandrill-992538.hostingersite.com/images/quality.jpg"
                     alt="مختبر الجودة"
                     className="h-full w-full object-cover"
                   />

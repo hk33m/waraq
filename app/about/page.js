@@ -1,5 +1,5 @@
-import  Navbar  from "@/components/home/navbar";
-import  Footer  from "@/components/home/footer";
+import Navbar from "@/components/home/navbar";
+import Footer from "@/components/home/footer";
 import { FloatingContact } from "@/components/floating-contact";
 import {
   Target,
@@ -47,8 +47,20 @@ const values = [
 
 export const metadata = {
   title: "من نحن | مصنع التكامل للأعلاف",
-  description: "تعرف على مصنع التكامل للأعلاف ورؤيتنا في صناعة أعلاف الدواجن والماشية، والتزامنا بالجودة والإنتاج المستدام.",
-  keywords: ["عن المصنع", "رؤية", "أعلاف", "دواجن", "ماشية", "الجودة", "الاستدامة"],
+  description:
+    "تعرف على مصنع التكامل للأعلاف ورؤيتنا في صناعة أعلاف الدواجن والماشية، والتزامنا بالجودة والإنتاج المستدام.",
+ alternates: {
+    canonical: "https://altakamull.com/about",
+  },
+    keywords: [
+    "عن المصنع",
+    "رؤية",
+    "أعلاف",
+    "دواجن",
+    "ماشية",
+    "الجودة",
+    "الاستدامة",
+  ],
 };
 
 export default function AboutPage() {
@@ -111,7 +123,7 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="aspect-[4/3] overflow-hidden rounded-2xl">
                   <img
-                    src="https://cornflowerblue-albatross-308247.hostingersite.com/images/modern-feed-production-line-machinery.jpg"
+                    src="https://mediumturquoise-mandrill-992538.hostingersite.com/images/modern-feed-production-line-machinery.jpg"
                     alt="مصنع التكامل للأعلاف"
                     className="h-full w-full object-cover"
                   />
@@ -129,14 +141,14 @@ export default function AboutPage() {
         <section id="vision" className="bg-muted/30 py-16 lg:py-24">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-              <div className="relative order-2 lg:order-1">
-                
-              </div>
+              <div className="relative order-2 lg:order-1"></div>
               <div className="order-1 lg:order-2">
                 <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-taka text-primary-foreground">
                   <Eye className="h-6 w-6" />
                 </div>
-                <h2 className="mb-6 text-3xl font-bold lg:text-4xl text-taka">رؤيتنا</h2>
+                <h2 className="mb-6 text-3xl font-bold lg:text-4xl text-taka">
+                  رؤيتنا
+                </h2>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
                     نسعى في مصنع التكامل للأعلاف إلى ترسيخ مكانتنا كخيار أول
@@ -165,7 +177,9 @@ export default function AboutPage() {
                 <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-takar text-primary-foreground">
                   <Target className="h-6 w-6" />
                 </div>
-                <h2 className="mb-6 text-3xl font-bold lg:text-4xl text-takar">رسالتنا</h2>
+                <h2 className="mb-6 text-3xl font-bold lg:text-4xl text-takar">
+                  رسالتنا
+                </h2>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
                     في مصنع التكامل للأعلاف، نلتزم بتوفير أعلاف عالية الجودة
@@ -184,9 +198,7 @@ export default function AboutPage() {
                   </p>
                 </div>
               </div>
-              <div className="relative">
-               
-              </div>
+              <div className="relative"></div>
             </div>
           </div>
         </section>

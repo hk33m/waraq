@@ -1,38 +1,47 @@
-"use client"
+"use client";
 
-import { use, useState,useEffect } from "react"
-import  Navbar  from "@/components/home/navbar"
-import  Footer  from "@/components/home/footer"
-import { FloatingContact } from "@/components/floating-contact"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Check, ArrowLeft, Heart, Share2, Facebook, Twitter, LinkIcon, ChevronLeft, ChevronRight } from "lucide-react"
-import Link from "next/link"
-import { notFound } from "next/navigation"
+import { use, useState, useEffect } from "react";
+import Navbar from "@/components/home/navbar";
+import Footer from "@/components/home/footer";
+import { FloatingContact } from "@/components/floating-contact";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import {
+  Check,
+  ArrowLeft,
+  Heart,
+  Share2,
+  Facebook,
+  Twitter,
+  LinkIcon,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import Skeleton from "react-loading-skeleton";
-import 'react-loading-skeleton/dist/skeleton.css';
-
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function ProductDetailPage({ params }) {
-  const { slug } = use(params)
+  const { slug } = use(params);
   //const product = productsData.find((p) => p.id === slug)
-  const [isLiked, setIsLiked] = useState(false)
-  const [showShareMenu, setShowShareMenu] = useState(false)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const[loading,setLoading]=useState(true);
+  const [isLiked, setIsLiked] = useState(false);
+  const [showShareMenu, setShowShareMenu] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   // if (!product) {
   //   notFound()
   // }
 
-  const [product, setProduct] = useState([])
+  const [product, setProduct] = useState([]);
 
-useEffect(() => {
+  useEffect(() => {
     const fetchProducts = async () => {
       try {
         const res = await fetch(
-          `https://cornflowerblue-albatross-308247.hostingersite.com/api/get_products.php?id=${slug}`
+          `https://mediumturquoise-mandrill-992538.hostingersite.com/api/get_products.php?id=${slug}`
         );
         if (!res.ok) throw new Error("فشل تحميل البيانات"); // تحقق من حالة HTTP
         const data = await res.json();
@@ -48,82 +57,100 @@ useEffect(() => {
     fetchProducts();
   }, []);
 
-
   const handleShare = (platform) => {
-    const url = typeof window !== "undefined" ? window.location.href : ""
-    const text = `${product.title} - مصنع التكامل للأعلاف`
+    const url = typeof window !== "undefined" ? window.location.href : "";
+    const text = `${product.title} - مصنع التكامل للأعلاف`;
 
     switch (platform) {
       case "facebook":
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, "_blank")
-        break
+        window.open(
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+            url
+          )}`,
+          "_blank"
+        );
+        break;
       case "twitter":
         window.open(
-          `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
-          "_blank",
-        )
-        break
+          `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+            text
+          )}&url=${encodeURIComponent(url)}`,
+          "_blank"
+        );
+        break;
       case "copy":
-        navigator.clipboard.writeText(url)
-        alert("تم نسخ الرابط!")
-        break
+        navigator.clipboard.writeText(url);
+        alert("تم نسخ الرابط!");
+        break;
     }
-    setShowShareMenu(false)
-  }
+    setShowShareMenu(false);
+  };
 
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % product.images.length)
-  }
+    setCurrentImageIndex((prev) => (prev + 1) % product.images.length);
+  };
 
   const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + product.images.length) % product.images.length)
-  }
+    setCurrentImageIndex(
+      (prev) => (prev - 1 + product.images.length) % product.images.length
+    );
+  };
 
   if (loading) {
-  return <div className="dark:bg-[#64312C]">
-    <Navbar />
-    <div className=" py-20 p-4  w-full animate-pulse bg-white shadow-sm">
-      {/* صورة المنتج */}
-      <div className="bg-gray-300 h-48 w-full rounded-md mb-4"></div>
-
-      {/* اسم المنتج */}
-      <div className="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
-
-      {/* وصف مختصر */}
-      <div className="h-4 bg-gray-300 rounded w-full mb-1"></div>
-      <div className="h-4 bg-gray-300 rounded w-5/6 mb-4"></div>
-
-      {/* السعر */}
-      <div className="h-6 bg-gray-300 rounded w-1/3 mb-4"></div>
-
-      {/* زر الإضافة للسلة */}
-      <div className="h-10 bg-gray-300 rounded w-full"></div>
-    </div>
-   <Footer />
-    </div>
-}
-
-if(!product || product == null || product.length===0){
-  return <div className="dark:bg-[#64312C]">
+    return (
+      <div className="dark:bg-[#64312C]">
         <Navbar />
-       <div className="flex flex-col items-center justify-center py-40  p-4 text-center ">
-      <h1 className="text-5xl font-extrabold text-taka mb-4">😞 المنتج غير موجود</h1>
-      <p className="text-lg text-primary mb-6">
-        عذرًا، لم نتمكن من العثور على المنتج الذي تبحث عنه. ربما تم حذفه او خطأ في الاتصال بالانترنت أو الرابط غير صحيح.
-      </p>
-      <Link href="/">
-        <Button className="bg-takar hover:bg-blue-700  px-6 py-3">
-          العودة للرئيسية
-        </Button>
-      </Link>
-      
-  <Button onClick={() => window.location.reload()} className="font-medium rounded-lg px-6 py-3 m-4 transition-colors duration-200">
-    تحديث الصفحة
-  </Button>   
-    </div>
-       <Footer />
+        <div className=" py-20 p-4  w-full animate-pulse bg-white shadow-sm">
+          {/* صورة المنتج */}
+          <div className="bg-gray-300 h-48 w-full rounded-md mb-4"></div>
+
+          {/* اسم المنتج */}
+          <div className="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
+
+          {/* وصف مختصر */}
+          <div className="h-4 bg-gray-300 rounded w-full mb-1"></div>
+          <div className="h-4 bg-gray-300 rounded w-5/6 mb-4"></div>
+
+          {/* السعر */}
+          <div className="h-6 bg-gray-300 rounded w-1/3 mb-4"></div>
+
+          {/* زر الإضافة للسلة */}
+          <div className="h-10 bg-gray-300 rounded w-full"></div>
+        </div>
+        <Footer />
       </div>
-}
+    );
+  }
+
+  if (!product || product == null || product.length === 0) {
+    return (
+      <div className="dark:bg-[#64312C]">
+        <Navbar />
+        <div className="flex flex-col items-center justify-center py-40  p-4 text-center ">
+          <h1 className="text-5xl font-extrabold text-taka mb-4">
+            😞 المنتج غير موجود
+          </h1>
+          <p className="text-lg text-primary mb-6">
+            عذرًا، لم نتمكن من العثور على المنتج الذي تبحث عنه. ربما تم حذفه او
+            خطأ في الاتصال بالانترنت أو الرابط غير صحيح.
+          </p>
+          <Link href="/">
+            <Button className="bg-takar hover:bg-blue-700  px-6 py-3">
+              العودة للرئيسية
+            </Button>
+          </Link>
+
+          <Button
+            onClick={() => window.location.reload()}
+            className="font-medium rounded-lg px-6 py-3 m-4 transition-colors duration-200"
+          >
+            تحديث الصفحة
+          </Button>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen flex-col dark:bg-[#64312C]">
@@ -140,8 +167,12 @@ if(!product || product == null || product.length===0){
               العودة إلى المنتجات
             </Link>
             <div className="flex items-center gap-3">
-              <h1 className="text-3xl font-bold text-primary-foreground lg:text-4xl">{product.title}</h1>
-              <Badge className="bg-secondary text-secondary-foreground">{product.badge}</Badge>
+              <h1 className="text-3xl font-bold text-primary-foreground lg:text-4xl">
+                {product.title}
+              </h1>
+              <Badge className="bg-secondary text-secondary-foreground">
+                {product.badge}
+              </Badge>
             </div>
             <p className="mt-2 text-primary-foreground/80">{product.titleEn}</p>
           </div>
@@ -155,7 +186,10 @@ if(!product || product == null || product.length===0){
               <div>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
                   <img
-                    src={`https://cornflowerblue-albatross-308247.hostingersite.com/${product.images[currentImageIndex]}` || "/placeholder.svg"}
+                    src={
+                      `https://mediumturquoise-mandrill-992538.hostingersite.com/${product.images[currentImageIndex]}` ||
+                      "/placeholder.svg"
+                    }
                     alt={`${product.title} - صورة ${currentImageIndex + 1}`}
                     className="h-full w-full object-cover"
                   />
@@ -189,7 +223,9 @@ if(!product || product == null || product.length===0){
                         key={index}
                         onClick={() => setCurrentImageIndex(index)}
                         className={`h-2 rounded-full transition-all ${
-                          index === currentImageIndex ? "w-8 bg-white" : "w-2 bg-white/50"
+                          index === currentImageIndex
+                            ? "w-8 bg-white"
+                            : "w-2 bg-white/50"
                         }`}
                       />
                     ))}
@@ -204,11 +240,16 @@ if(!product || product == null || product.length===0){
                         key={index}
                         onClick={() => setCurrentImageIndex(index)}
                         className={`relative aspect-square overflow-hidden rounded-lg ${
-                          index === currentImageIndex ? "ring-2 ring-primary" : "opacity-60 hover:opacity-100"
+                          index === currentImageIndex
+                            ? "ring-2 ring-primary"
+                            : "opacity-60 hover:opacity-100"
                         }`}
                       >
                         <img
-                          src={`https://cornflowerblue-albatross-308247.hostingersite.com/${image}` || "/placeholder.svg"}
+                          src={
+                            `https://mediumturquoise-mandrill-992538.hostingersite.com/${image}` ||
+                            "/placeholder.svg"
+                          }
                           alt={`صورة ${index + 1}`}
                           className="h-full w-full object-cover"
                         />
@@ -223,18 +264,18 @@ if(!product || product == null || product.length===0){
                     size="lg"
                     onClick={() => setIsLiked(!isLiked)}
                     className={`flex-1 gap-2 transition-colors duration-300 ${
-                    isLiked
-               ? "bg-red-500 text-white hover:bg-red-600"
-                : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-100"
-               }`}
-                >
-          <Heart
-          className={`h-5 w-5 transition-colors duration-300 ${
-          isLiked ? "text-white fill-white" : "text-gray-500"
-          }`}
-        />
-        {isLiked ? "تم الإعجاب" : "أعجبني"}
-      </Button>     
+                      isLiked
+                        ? "bg-red-500 text-white hover:bg-red-600"
+                        : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-100"
+                    }`}
+                  >
+                    <Heart
+                      className={`h-5 w-5 transition-colors duration-300 ${
+                        isLiked ? "text-white fill-white" : "text-gray-500"
+                      }`}
+                    />
+                    {isLiked ? "تم الإعجاب" : "أعجبني"}
+                  </Button>
 
                   <div className="relative flex-1">
                     <Button
@@ -283,15 +324,24 @@ if(!product || product == null || product.length===0){
 
               {/* Product Info */}
               <div>
-                <h2 className="mb-4 text-2xl font-bold text-taka">وصف المنتج</h2>
-                <p className="mb-6 text-muted-foreground leading-relaxed">{product.fullDescription}</p>
+                <h2 className="mb-4 text-2xl font-bold text-taka">
+                  وصف المنتج
+                </h2>
+                <p className="mb-6 text-muted-foreground leading-relaxed">
+                  {product.fullDescription}
+                </p>
 
                 {/* Benefits */}
                 <div className="mb-8">
-                  <h3 className="mb-3 text-xl font-semibold text-takar">المميزات والفوائد:</h3>
+                  <h3 className="mb-3 text-xl font-semibold text-takar">
+                    المميزات والفوائد:
+                  </h3>
                   <ul className="space-y-2">
                     {product.benefits.map((benefit, index) => (
-                      <li key={index} className="flex items-center gap-2 text-muted-foreground">
+                      <li
+                        key={index}
+                        className="flex items-center gap-2 text-muted-foreground"
+                      >
                         <Check className="h-5 w-5 shrink-0 text-primary" />
                         <span>{benefit}</span>
                       </li>
@@ -351,6 +401,5 @@ if(!product || product == null || product.length===0){
       <Footer />
       <FloatingContact />
     </div>
-  )
- 
+  );
 }
