@@ -106,7 +106,7 @@ export default function ProductsPage() {
     const fetchProducts = async () => {
       try {
         const res = await fetch(
-          "https://mediumturquoise-mandrill-992538.hostingersite.com/api/get_products.php"
+          "https://lime-quail-363527.hostingersite.com/api/get_products.php"
         );
         if (!res.ok) throw new Error("فشل تحميل البيانات"); // تحقق من حالة HTTP
         const data = await res.json();
@@ -216,7 +216,7 @@ export default function ProductsPage() {
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <img
                         src={
-                          `https://mediumturquoise-mandrill-992538.hostingersite.com/${product.images[0]}` ||
+                          `https://lime-quail-363527.hostingersite.com/${product.images[0]}` ||
                           "/placeholder.svg"
                         }
                         alt={product.title}

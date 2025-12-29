@@ -49,10 +49,10 @@ export const metadata = {
   title: "من نحن | مصنع التكامل للأعلاف",
   description:
     "تعرف على مصنع التكامل للأعلاف ورؤيتنا في صناعة أعلاف الدواجن والماشية، والتزامنا بالجودة والإنتاج المستدام.",
- alternates: {
+  alternates: {
     canonical: "https://altakamull.com/about",
   },
-    keywords: [
+  keywords: [
     "عن المصنع",
     "رؤية",
     "أعلاف",
@@ -123,7 +123,7 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="aspect-[4/3] overflow-hidden rounded-2xl">
                   <img
-                    src="https://mediumturquoise-mandrill-992538.hostingersite.com/images/modern-feed-production-line-machinery.jpg"
+                    src="https://lime-quail-363527.hostingersite.com/images/modern-feed-production-line-machinery.jpg"
                     alt="مصنع التكامل للأعلاف"
                     className="h-full w-full object-cover"
                   />

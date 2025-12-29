@@ -32,7 +32,7 @@ export function QualitySection() {
           <div className="relative order-2 lg:order-1">
             <div className="aspect-[4/3] overflow-hidden rounded-2xl">
               <img
-                src="https://mediumturquoise-mandrill-992538.hostingersite.com/images/quality.jpg"
+                src="https://lime-quail-363527.hostingersite.com/images/quality.jpg"
                 alt="مختبر ضبط الجودة"
                 className="h-full w-full object-cover"
               />

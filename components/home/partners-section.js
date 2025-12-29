@@ -26,7 +26,7 @@ export function PartnersSection() {
               <img
                 src={
                   partner.logo ||
-                  "https://mediumturquoise-mandrill-992538.hostingersite.com/images/placeholder.svg"
+                  "https://lime-quail-363527.hostingersite.com/images/placeholder.svg"
                 }
                 alt={partner.name}
                 className="h-12 w-auto object-contain"

@@ -272,7 +272,7 @@ export default function QualityPage() {
               <div className="relative">
                 <div className="aspect-square overflow-hidden rounded-2xl">
                   <img
-                    src="https://mediumturquoise-mandrill-992538.hostingersite.com/images/quality.jpg"
+                    src="https://lime-quail-363527.hostingersite.com/images/quality.jpg"
                     alt="مختبر الجودة"
                     className="h-full w-full object-cover"
                   />

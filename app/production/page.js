@@ -109,7 +109,7 @@ const technologies = [
 
 export const metadata = {
   title: "الإنتاج والتقنية | مصنع التكامل للأعلاف",
- alternates: {
+  alternates: {
     canonical: "https://altakamull.com/production",
   },
   description:
@@ -294,21 +294,21 @@ export default function ProductionPage() {
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               <div className="aspect-[4/3] overflow-hidden rounded-2xl">
                 <img
-                  src="https://mediumturquoise-mandrill-992538.hostingersite.com/images/modern-feed-production-line-machinery.jpg"
+                  src="https://lime-quail-363527.hostingersite.com/images/modern-feed-production-line-machinery.jpg"
                   alt="خط الإنتاج"
                   className="h-full w-full object-cover"
                 />
               </div>
               <div className="aspect-[4/3] overflow-hidden rounded-2xl">
                 <img
-                  src="https://mediumturquoise-mandrill-992538.hostingersite.com/images/industrial-feed-manufacturing-factory-aerial-view.jpg"
+                  src="https://lime-quail-363527.hostingersite.com/images/industrial-feed-manufacturing-factory-aerial-view.jpg"
                   alt="المصنع من الداخل"
                   className="h-full w-full object-cover"
                 />
               </div>
               <div className="aspect-[4/3] overflow-hidden rounded-2xl md:col-span-2 lg:col-span-1">
                 <img
-                  src="https://mediumturquoise-mandrill-992538.hostingersite.com/images/quality.jpg"
+                  src="https://lime-quail-363527.hostingersite.com/images/quality.jpg"
                   alt="مختبر الجودة"
                   className="h-full w-full object-cover"
                 />

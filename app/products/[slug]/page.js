@@ -41,7 +41,7 @@ export default function ProductDetailPage({ params }) {
     const fetchProducts = async () => {
       try {
         const res = await fetch(
-          `https://mediumturquoise-mandrill-992538.hostingersite.com/api/get_products.php?id=${slug}`
+          `https://lime-quail-363527.hostingersite.com/api/get_products.php?id=${slug}`
         );
         if (!res.ok) throw new Error("فشل تحميل البيانات"); // تحقق من حالة HTTP
         const data = await res.json();
@@ -187,7 +187,7 @@ export default function ProductDetailPage({ params }) {
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
                   <img
                     src={
-                      `https://mediumturquoise-mandrill-992538.hostingersite.com/${product.images[currentImageIndex]}` ||
+                      `https://lime-quail-363527.hostingersite.com/${product.images[currentImageIndex]}` ||
                       "/placeholder.svg"
                     }
                     alt={`${product.title} - صورة ${currentImageIndex + 1}`}
@@ -247,7 +247,7 @@ export default function ProductDetailPage({ params }) {
                       >
                         <img
                           src={
-                            `https://mediumturquoise-mandrill-992538.hostingersite.com/${image}` ||
+                            `https://lime-quail-363527.hostingersite.com/${image}` ||
                             "/placeholder.svg"
                           }
                           alt={`صورة ${index + 1}`}

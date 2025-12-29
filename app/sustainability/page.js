@@ -92,7 +92,7 @@ export const metadata = {
   alternates: {
     canonical: "https://altakamull.com/sustainability",
   },
-    keywords: [
+  keywords: [
     "استدامة",
     "بيئة",
     "مسؤولية اجتماعية",
@@ -290,7 +290,7 @@ export default function SustainabilityPage() {
               <div className="relative">
                 <div className="aspect-[4/3] overflow-hidden rounded-2xl">
                   <img
-                    src="https://mediumturquoise-mandrill-992538.hostingersite.com/images/poultry-farm-with-healthy-chickens.jpg"
+                    src="https://lime-quail-363527.hostingersite.com/images/poultry-farm-with-healthy-chickens.jpg"
                     alt="حلول أعلاف مستدامة"
                     className="h-full w-full object-cover"
                   />
