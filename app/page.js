@@ -1,29 +1,28 @@
-import Image from "next/image";
-import Navbar from "@/components/home/navbar";
-import Footer from "@/components/home/footer";
-import { FloatingContact } from "@/components/floating-contact"
-import { HeroSection } from "@/components/home/hero-section"
-import { AboutSection } from "@/components/home/about-section"
-import { StatsSection } from "@/components/home/stats-section"
-import { ProductsSection } from "@/components/home/products-section"
-import { QualitySection } from "@/components/home/quality-section"
-import { PartnersSection } from "@/components/home/partners-section"
-import { CTASection } from "@/components/home/cta-section"
+'use client';
+
+import { useState } from 'react';
+import Header from '@/components/header'
+import Hero from '@/components/hero'
+import Products from '@/components/products'
+import Features from '@/components/features'
+import Reviews from '@/components/reviews'
+import Contact from '@/components/contact'
+import Footer from '@/components/footer'
+import { CartDrawer } from '@/components/cart-drawer'
+
 export default function Home() {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   return (
-    <div className="flex min-h-screen flex-col dark:bg-[#64312C]">
-      <Navbar />
-      <main className="flex-1">
-        <HeroSection />
-        <AboutSection />
-        <StatsSection />
-        <ProductsSection />
-        <QualitySection />
-        <PartnersSection />
-        <CTASection />
-      </main>
+    <main className="min-h-screen bg-background overflow-hidden">
+      <Header onCartClick={() => setIsCartOpen(true)} />
+      <Hero />
+      <Products />
+      <Features />
+      <Reviews />
+      <Contact />
       <Footer />
-      <FloatingContact />
-    </div>
-  );
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+    </main>
+  )
 }

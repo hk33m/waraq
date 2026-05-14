@@ -1,52 +1,33 @@
-import "./globals.css";
+import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from "@/components/theme-provider";
-import { Analytics } from "@vercel/analytics/next";
+import { Toaster } from "@/components/ui/sonner"
+import { CartProvider } from '@/providers/cart-provider'
+import './globals.css'
 
-export const metadata = {
-  title: "مصنع التكامل للأعلاف | Al-Takamul Feed Factory",
-  alternates: {
-    canonical: "https://altakamull.com",
-  },
-  description:
-    "مصنع التكامل للأعلاف في المملكة العربية السعودية - الشريك الموثوق لإنتاج أعلاف الدواجن والماشية عالية الجودة بقدرة إنتاجية تصل إلى 120 طن في الساعة. نقدم منتجات أعلاف عضوية ومدعمة بالفيتامينات لتغذية أفضل لمزارع الدواجن والماشية.",
-  keywords: [
-    "أعلاف",
-    "أعلاف دواجن",
-    "أعلاف ماشية",
-    "منتجات أعلاف",
-    "feed",
-    "poultry feed",
-    "livestock feed",
-    "مصنع أعلاف",
-    "Al-Takamul Factory",
-    "مصنع الأعلاف السعودية",
-    "أعلاف عالية الجودة",
-    "أعلاف للحيوانات",
-    "أعلاف الدواجن في السعودية",
-    "تغذية الماشية",
-    "مزارع الدواجن",
-    "مزارع الماشية",
-    "منتجات أعلاف",
-    "أعلاف عضوية",
-    "أعلاف مدعمة بالفيتامينات",
-    "إنتاج الأعلاف",
-    "توريد الأعلاف",
-    "أعلاف المملكة العربية السعودية",
-    "دواجن",
-    "ماشية",
-    "مزارع",
-    "تربية الدواجن",
-    "تربية الماشية",
-  ],
+
+export const metadata ={
+  title: 'ورق العنب المميز - Waraq Al Ainab',
+  description: 'منتجات ورق العنب المطبوخ الجاهز بجودة عالية مستوحى من الطبيعة والأطعمة الشرقية الأصيلة',
+  generator: 'v0.app',
   icons: {
     icon: [
-      { url: "/favicon.ico" }, // Favicon للتبويب والمتصفح
+      {
+        url: '/icon-light-32x32.png',
+        media: '(prefers-color-scheme: light)',
+      },
+      {
+        url: '/icon-dark-32x32.png',
+        media: '(prefers-color-scheme: dark)',
+      },
+      {
+        url: '/icon.svg',
+        type: 'image/svg+xml',
+      },
     ],
-    apple: "/180-01.png", // iPhone/iPad Home Screen
-    android: "/192.png", // Android Home Screen / PWA
-    shortcut: "/512-01.png", // PWA عالية الجودة
+    apple: '/apple-icon.png',
   },
-};
+}
+
 
 export default function RootLayout({ children }) {
   return (
@@ -58,7 +39,10 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
+          <CartProvider>
           {children}
+          </CartProvider>
+              <Toaster richColors position="top-center" />
         </ThemeProvider>
       </body>
     </html>
