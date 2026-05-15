@@ -146,7 +146,7 @@ export default function CheckoutPage() {
         message += `\\nملاحظات: ${formData.notes}\\n`;
       }
 
-      const whatsappPhone = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || '966507777777';
+      const whatsappPhone = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || '967775591565';
       const encodedMessage = encodeURIComponent(message);
       const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodedMessage}`;
 
