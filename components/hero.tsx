@@ -1,34 +1,40 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import { ArrowDown } from 'lucide-react'
-import Image from 'next/image'
-import Link from "next/link"
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { ArrowDown } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
     },
-  }
+  },
+};
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' },
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1] as const,
     },
-  }
+  },
+};
 
   return (
-    <section id="hero" className="min-h-screen pt-30 pb-10 relative overflow-hidden bg-background">
+    <section
+      id="hero"
+      className="min-h-screen pt-30 pb-10 relative overflow-hidden bg-background"
+    >
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
@@ -64,17 +70,21 @@ export default function Hero() {
               variants={itemVariants}
               className="text-lg text-muted-foreground font-cairo leading-relaxed"
             >
-              منتجات ورق العنب المطبوخ الجاهز، مصنوعة بأفضل المكونات الطبيعية واتباع أصول الطبخ الشرقي التقليدي. جاهزة للتقديم مباشرة على مائدتك.
+              منتجات ورق العنب المطبوخ الجاهز، مصنوعة بأفضل المكونات الطبيعية
+              واتباع أصول الطبخ الشرقي التقليدي. جاهزة للتقديم مباشرة على
+              مائدتك.
             </motion.p>
 
             <motion.div
               variants={itemVariants}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white font-cairo text-base h-12">
-               <a href="#products" >
-                اطلب الآن
-              </a>
+              <Button
+                asChild
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-white font-cairo text-base h-12"
+              >
+                <a href="#products">اطلب الآن</a>
               </Button>
               <Button
                 size="lg"
@@ -86,21 +96,30 @@ export default function Hero() {
             </motion.div>
 
             {/* Stats */}
-            <motion.div
-              variants={itemVariants}
-              className="flex gap-8 pt-4"
-            >
+            <motion.div variants={itemVariants} className="flex gap-8 pt-4">
               <div>
-                <p className="text-2xl font-bold text-primary font-playfair">10K+</p>
-                <p className="text-sm text-muted-foreground font-cairo">عميل راضٍ</p>
+                <p className="text-2xl font-bold text-primary font-playfair">
+                  10K+
+                </p>
+                <p className="text-sm text-muted-foreground font-cairo">
+                  عميل راضٍ
+                </p>
               </div>
               <div>
-                <p className="text-2xl font-bold text-primary font-playfair">5★</p>
-                <p className="text-sm text-muted-foreground font-cairo">تقييم مميز</p>
+                <p className="text-2xl font-bold text-primary font-playfair">
+                  5★
+                </p>
+                <p className="text-sm text-muted-foreground font-cairo">
+                  تقييم مميز
+                </p>
               </div>
               <div>
-                <p className="text-2xl font-bold text-primary font-playfair">100%</p>
-                <p className="text-sm text-muted-foreground font-cairo">طبيعي</p>
+                <p className="text-2xl font-bold text-primary font-playfair">
+                  100%
+                </p>
+                <p className="text-sm text-muted-foreground font-cairo">
+                  طبيعي
+                </p>
               </div>
             </motion.div>
           </motion.div>
@@ -120,14 +139,16 @@ export default function Hero() {
               className="object-cover rounded-3xl shadow-2xl"
               priority
             />
-            
+
             {/* Floating Card */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity }}
               className="absolute -bottom-4 -left-4 bg-card rounded-2xl p-4 shadow-xl border border-border w-48"
             >
-              <p className="font-cairo text-sm text-foreground font-semibold">مكونات طبيعية 100%</p>
+              <p className="font-cairo text-sm text-foreground font-semibold">
+                مكونات طبيعية 100%
+              </p>
               <div className="flex gap-2 mt-2">
                 <div className="w-8 h-8 bg-primary/20 rounded-full"></div>
                 <div className="w-8 h-8 bg-accent/20 rounded-full"></div>
@@ -147,5 +168,5 @@ export default function Hero() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
