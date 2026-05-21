@@ -4,11 +4,13 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Menu, X, ShoppingCart } from 'lucide-react'
-import { useCartContext } from '@/providers/cart-provider'
+import { useCartStore } from '@/stores/cartStore'
 
 export default function Header({ onCartClick }: { onCartClick: () => void }) {
   const [isOpen, setIsOpen] = useState(false)
-  const { cart } = useCartContext()
+ const cartItems = useCartStore((state) => state.cartItems);
+
+const cartCount = cartItems.length;
 
   const navItems = [
     { name: 'الرئيسية', href: '#hero' },
@@ -65,13 +67,13 @@ export default function Header({ onCartClick }: { onCartClick: () => void }) {
                 className="relative p-2 text-foreground hover:text-primary transition-colors"
               >
                 <ShoppingCart className="w-6 h-6" />
-                {cart.items.length > 0 && (
+                {cartCount > 0 && (
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
                   >
-                    {cart.items.length}
+                    {cartCount}
                   </motion.span>
                 )}
               </button>
@@ -114,7 +116,7 @@ export default function Header({ onCartClick }: { onCartClick: () => void }) {
                 className="w-full bg-primary hover:bg-primary/90 text-white font-cairo mt-4"
               >
                 <ShoppingCart className="w-4 h-4 ml-2" />
-                السلة ({cart.items.length})
+                السلة ({cartCount})
               </Button>
             </div>
           </motion.div>

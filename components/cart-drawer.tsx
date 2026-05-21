@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useCartContext } from '@/providers/cart-provider';
+import { useCartStore } from '@/stores/cartStore';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { X, Plus, Minus, Trash2, ShoppingBag } from 'lucide-react';
@@ -13,7 +13,16 @@ interface CartDrawerProps {
 }
 
 export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
-  const { cart, updateQuantity, removeFromCart } = useCartContext();
+   const cartItems = useCartStore((state) => state.cartItems);
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const increaseQuantity = useCartStore((state) => state.increaseQuantity);
+  const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
+
+  const totalPrice = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
 
   return (
     <AnimatePresence>
@@ -52,7 +61,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
             {/* Items */}
             <div className="flex-1 overflow-y-auto p-6 space-y-4">
-              {cart.items.length === 0 ? (
+              {cartItems.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center py-8">
                   <ShoppingBag className="w-16 h-16 text-muted-foreground mb-4 opacity-50" />
                   <p className="text-muted-foreground text-lg mb-4">سلتك فارغة حالياً</p>
@@ -64,7 +73,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                   </Button>
                 </div>
               ) : (
-                cart.items.map((item) => (
+                cartItems.map((item) => (
                   <motion.div
                     key={item.id}
                     initial={{ opacity: 0, x: 20 }}
@@ -99,14 +108,14 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                       </button>
                       <div className="flex items-center gap-2 bg-muted rounded">
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                           onClick={() => decreaseQuantity(item.id)}
                           className="p-1 hover:bg-background transition-colors"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
                         <span className="px-2 text-sm font-bold">{item.quantity}</span>
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                           onClick={() => increaseQuantity(item.id)}
                           className="p-1 hover:bg-background transition-colors"
                         >
                           <Plus className="w-3 h-3" />
@@ -119,12 +128,12 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
             </div>
 
             {/* Footer */}
-            {cart.items.length > 0 && (
+            {cartItems.length > 0 && (
               <div className="border-t border-border p-6 space-y-4 bg-card">
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">المجموع الفرعي:</span>
-                    <span className="font-semibold">{cart.total} ر.س</span>
+                    <span className="font-semibold">{totalPrice} ر.س</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">الشحن:</span>
@@ -132,7 +141,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                   </div>
                   <div className="border-t border-border pt-2 flex justify-between text-lg font-bold">
                     <span>الإجمالي:</span>
-                    <span className="text-primary">{cart.total} ر.س</span>
+                    <span className="text-primary">{totalPrice} ر.س</span>
                   </div>
                 </div>
 

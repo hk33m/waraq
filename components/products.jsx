@@ -3,140 +3,53 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { useCartContext } from '@/providers/cart-provider';
 import Image from 'next/image';
 import { toast } from "sonner"
 import { ShoppingCart, Plus, Minus } from 'lucide-react';
+import { products } from '@/data/products';
+import {useCartStore} from '@/stores/cartStore'
 
-const PRODUCTS = [
-  {
-    id: '1',
-    name: 'ورق العنب الكلاسيكي',
-    category: 'كلاسيكي',
-    price: 45,
-    image: '/product-classic.jpg',
-    description: 'وصفة تقليدية بمكونات فاخرة',
-    rating: 4.8,
-    reviews: 245,
-    badge: 'الأكثر مبيعاً',
-  },
-  {
-    id: '2',
-    name: 'ورق العنب العضوي',
-    category: 'عضوي',
-    price: 55,
-    image: '/product-organic.jpg',
-    description: 'مكونات طبيعية 100% عضوية',
-    rating: 4.9,
-    reviews: 189,
-    badge: 'عضوي معتمد',
-  },
-  {
-    id: '3',
-    name: 'ورق العنب الحار',
-    category: 'حار',
-    price: 50,
-    image: '/product-spiced.jpg',
-    description: 'بنكهات شرقية حارة مميزة',
-    rating: 4.7,
-    reviews: 156,
-    badge: 'حار ومميز',
-  },
-  {
-    id: '4',
-    name: 'ورق العنب الفاخر',
-    category: 'فاخر',
-    price: 75,
-    image: '/product-premium.jpg',
-    description: 'اختيار فاخر من أجود الأوراق',
-    rating: 5.0,
-    reviews: 98,
-    badge: 'فاخر',
-  },
-  {
-    id: '5',
-    name: 'عبوة العائلة',
-    category: 'عائلي',
-    price: 120,
-    image: '/product-family.jpg',
-    description: 'تشكيلة متنوعة للعائلة الكريمة',
-    rating: 4.9,
-    reviews: 203,
-    badge: 'توفير 15%',
-  },
-  {
-    id: '6',
-    name: 'صندوق الهدية الفاخر',
-    category: 'هدايا',
-    price: 85,
-    image: '/product-gift.jpg',
-    description: 'تغليف فاخر مثالي للهدايا',
-    rating: 4.8,
-    reviews: 142,
-    badge: 'للهدايا',
-  },
-  {
-    id: '7',
-    name: 'حصص فردية فاخرة',
-    category: 'مقبلات',
-    price: 35,
-    image: '/product-mini.jpg',
-    description: 'حصص صغيرة أنيقة للضيافة',
-    rating: 4.6,
-    reviews: 127,
-    badge: 'مقبلات',
-  },
-  {
-    id: '8',
-    name: 'ورق العنب النباتي',
-    category: 'نباتي',
-    price: 50,
-    image: '/product-vegan.jpg',
-    description: 'نسخة نباتية صحية لذيذة',
-    rating: 4.7,
-    reviews: 94,
-    badge: 'نباتي',
-  },
-  {
-    id: '9',
-    name: 'عبوة الجملة',
-    category: 'جملة',
-    price: 280,
-    image: '/product-bulk.jpg',
-    description: 'تعبئة كبيرة للمطاعم والفعاليات',
-    rating: 4.9,
-    reviews: 67,
-    badge: 'توفير 20%',
-  },
-];
 
 export default function Products() {
-  const { addToCart } = useCartContext();
-  const [selectedQuantities, setSelectedQuantities] = useState<Record<string, number>>({});
+  const addToCart = useCartStore((state) => state.addToCart);
+ const cartItems = useCartStore((state) => state.cartItems);
+  const [productsList, setProductsList] = useState(
+  products.map((product) => ({
+    ...product,
+    quantity: 1,
+  }))
+);
 
-  const handleAddToCart = (product: (typeof PRODUCTS)[0], quantity: number) => {
-    if (quantity > 0) {
-      addToCart({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-        category: product.category,
-      }, quantity);
-      
-      setSelectedQuantities(prev => ({
-        ...prev,
-        [product.id]: 1,
-      }));
-      toast.success(`تم إضافتها الى السلة ( ${product.name} )`, {
-        description: '',
-      });
-    }
-  };
+const increaseQuantity = (id) => {
+  setProductsList((prev) =>
+    prev.map((product) =>
+      product.id === id
+        ? {
+            ...product,
+            quantity: product.quantity + 1,
+          }
+        : product
+    )
+  );
+};
 
-  const getQuantity = (productId: string) => selectedQuantities[productId] || 1;
+const decreaseQuantity = (id) => {
+  setProductsList((prev) =>
+    prev.map((product) =>
+      product.id === id
+        ? {
+            ...product,
+            quantity:
+              product.quantity > 1
+                ? product.quantity - 1
+                : 1,
+          }
+        : product
+    )
+  );
+};
 
-  const containerVariants = {
+ const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -155,6 +68,7 @@ export default function Products() {
       transition: { duration: 0.5 },
     },
   };
+
 
   return (
     <section id="products" className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
@@ -181,7 +95,7 @@ export default function Products() {
           viewport={{ once: true, margin: '-100px' }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {PRODUCTS.map((product) => (
+          {productsList.map((product) => (
             <motion.div
               key={product.id}
               variants={itemVariants}
@@ -239,29 +153,34 @@ export default function Products() {
                   <div className="flex gap-3 mt-auto">
                     <div className="flex items-center border border-border rounded-lg">
                       <button
-                        onClick={() => setSelectedQuantities(prev => ({
-                          ...prev,
-                          [product.id]: Math.max(1, (prev[product.id] || 1) - 1),
-                        }))}
+                        onClick={() => decreaseQuantity(product.id)}
                         className="p-2 hover:bg-muted transition-colors"
                       >
                         <Minus className="w-4 h-4" />
                       </button>
                       <span className="px-4 py-2 font-semibold">
-                        {getQuantity(product.id)}
+                       {product.quantity}
                       </span>
                       <button
-                        onClick={() => setSelectedQuantities(prev => ({
-                          ...prev,
-                          [product.id]: (prev[product.id] || 1) + 1,
-                        }))}
+                       onClick={() => increaseQuantity(product.id)}
                         className="p-2 hover:bg-muted transition-colors"
                       >
                         <Plus className="w-4 h-4" />
                       </button>
                     </div>
                     <Button
-                      onClick={() => handleAddToCart(product, getQuantity(product.id))}
+                      onClick={() => {
+  const existingItem = cartItems.find(
+    (item) => item.id === product.id
+  );
+
+  if (existingItem) {
+    toast.info(`${product.name} موجود بالفعل في السلة`);
+  } else {
+    addToCart(product);
+    toast.success(`${product.name} تم إضافته إلى السلة`);
+  }
+}}
                       className="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
                     >
                       <ShoppingCart className="w-5 h-5" />

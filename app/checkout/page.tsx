@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { useCartContext } from '@/providers/cart-provider';
+import { useCartStore } from '@/stores/cartStore';
 import Image from 'next/image';
 import { ArrowRight, Download } from 'lucide-react';
 import Link from 'next/link';
@@ -21,7 +21,12 @@ interface FormData {
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { cart, clearCart } = useCartContext();
+  const cartItems = useCartStore((state) => state.cartItems);
+  const totalPrice = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const clearCart = useCartStore((state) => state.clearCart);
   const [formData, setFormData] = useState<FormData>({
     name: '',
     phone: '',
@@ -66,7 +71,7 @@ export default function CheckoutPage() {
               </tr>
             </thead>
             <tbody>
-              ${cart.items.map(item => `
+              ${cartItems.map(item => `
                 <tr style="border-bottom: 1px solid #e8e0d5;">
                   <td style="padding: 10px; text-align: right; font-size: 12px;">${item.name}</td>
                   <td style="padding: 10px; text-align: center; font-size: 12px;">${item.quantity}</td>
@@ -81,7 +86,7 @@ export default function CheckoutPage() {
         <div style="background: #f5f3f0; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
           <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
             <span>المجموع الفرعي:</span>
-            <span style="font-weight: bold;">${cart.total} ر.س</span>
+            <span style="font-weight: bold;">${totalPrice} ر.س</span>
           </div>
           <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
             <span>الشحن:</span>
@@ -89,7 +94,7 @@ export default function CheckoutPage() {
           </div>
           <div style="border-top: 2px solid #d4c4b0; padding-top: 8px; display: flex; justify-content: space-between; font-size: 16px;">
             <span style="font-weight: bold;">الإجمالي:</span>
-            <span style="font-weight: bold; color: #5a7d6f; font-size: 18px;">${cart.total} ر.س</span>
+            <span style="font-weight: bold; color: #5a7d6f; font-size: 18px;">${totalPrice} ر.س</span>
           </div>
         </div>
 
@@ -127,23 +132,23 @@ export default function CheckoutPage() {
 
   const sendWhatsAppMessage = async (receiptImage: string | null) => {
     try {
-      let message = `مرحباً! لدي طلب جديد:\\n\\n`;
-      message += `*بيانات العميل:*\\n`;
-      message += `الاسم: ${formData.name}\\n`;
-      message += `الهاتف: ${formData.phone}\\n`;
-      message += `البريد: ${formData.email}\\n`;
-      message += `العنوان: ${formData.address}\\n`;
-      message += `المدينة: ${formData.city}\\n\\n`;
-      message += `*تفاصيل الطلب:*\\n`;
+      let message = `مرحباً! لدي طلب جديد:\n\n`;
+      message += `*بيانات العميل:* \n`;
+      message += `الاسم: ${formData.name}\n`;
+      message += `الهاتف: ${formData.phone}\n`;
+      message += `البريد: ${formData.email}\n`;
+      message += `العنوان: ${formData.address}\n`;
+      message += `المدينة: ${formData.city}\n\n`;
+      message += `*تفاصيل الطلب:*\n`;
 
-      cart.items.forEach(item => {
-        message += `${item.name} × ${item.quantity} = ${item.price * item.quantity} ر.س\\n`;
+      cartItems.forEach(item => {
+        message += `${item.name} × ${item.quantity} = ${item.price * item.quantity} ر.س\n`;
       });
 
-      message += `\\n*الإجمالي: ${cart.total} ر.س*\\n`;
+      message += `\n*الإجمالي: ${totalPrice} ر.س* \n`;
 
       if (formData.notes) {
-        message += `\\nملاحظات: ${formData.notes}\\n`;
+        message += `\nملاحظات: ${formData.notes}\n`;
       }
 
       const whatsappPhone = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || '967775591565';
@@ -179,7 +184,7 @@ export default function CheckoutPage() {
     }
   };
 
-  if (cart.items.length === 0 && !orderReceipt) {
+  if (totalPrice.length === 0 && !orderReceipt) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center px-4">
         <div className="text-center py-12">
@@ -383,7 +388,7 @@ export default function CheckoutPage() {
               </h2>
 
               <div className="space-y-4 mb-6 max-h-96 overflow-y-auto">
-                {cart.items.map(item => (
+                {cartItems.map(item => (
                   <div key={item.id} className="flex gap-3 pb-4 border-b border-border">
                     <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
                       <Image
@@ -405,7 +410,7 @@ export default function CheckoutPage() {
               <div className="border-t border-border pt-6 space-y-3">
                 <div className="flex justify-between text-sm">
                   <span>المجموع الفرعي:</span>
-                  <span className="font-bold">{cart.total} ر.س</span>
+                  <span className="font-bold">{totalPrice} ر.س</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>الشحن:</span>
@@ -413,7 +418,7 @@ export default function CheckoutPage() {
                 </div>
                 <div className="border-t border-border pt-3 flex justify-between text-lg font-bold">
                   <span>الإجمالي:</span>
-                  <span className="text-primary">{cart.total} ر.س</span>
+                  <span className="text-primary">{totalPrice} ر.س</span>
                 </div>
               </div>
             </div>
