@@ -1,33 +1,28 @@
-import { Analytics } from '@vercel/analytics/next'
+import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@/components/ui/sonner"
-import { CartProvider } from '@/providers/cart-provider'
-import './globals.css'
+import { Toaster } from "@/components/ui/sonner";
+import { CartProvider } from "@/providers/cart-provider";
+import "./globals.css";
 
-
-export const metadata ={
-  title: 'ورق العنب المميز - Waraq Al Ainab',
-  description: 'منتجات ورق العنب المطبوخ الجاهز بجودة عالية مستوحى من الطبيعة والأطعمة الشرقية الأصيلة',
-  generator: 'v0.app',
+export const metadata = {
+  title: "ورق العنب المميز - Waraq Al Ainab",
+  description:
+    "منتجات ورق العنب المطبوخ الجاهز بجودة عالية مستوحى من الطبيعة والأطعمة الشرقية الأصيلة",
+  generator: "v0.app",
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
+        url: "/favicon-32x32.png",
+        media: "(prefers-color-scheme: light)",
       },
       {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
+        url: "/favicon-32x32.png",
+        media: "(prefers-color-scheme: dark)",
       },
     ],
-    apple: '/apple-icon.png',
+    apple: "/apple-touch-icon.png",
   },
-}
-
+};
 
 export default function RootLayout({ children }) {
   return (
@@ -39,10 +34,8 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <CartProvider>
-          {children}
-          </CartProvider>
-              <Toaster richColors position="top-center" />
+          <CartProvider>{children}</CartProvider>
+          <Toaster richColors position="top-center" />
         </ThemeProvider>
       </body>
     </html>
